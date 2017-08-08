@@ -1,18 +1,9 @@
 const sliceCalculator = require('slice-calculator')
-const reduce = require('fn-reduce')
-
-function descriptorsFactory (props) {
-    return reduce((descriptors, prop) => {
-        descriptors[prop] = {
-            value: props[prop]
-        }
-        return descriptors
-    }, {}, Object.keys(props))
-}
+const vdf = require('value-descriptors-factory')
 
 class SliceIterable {
     constructor (iterable) {
-        Object.defineProperties(this, descriptorsFactory({
+        Object.defineProperties(this, vdf({
             iterable,
             start: 0,
             end: Infinity
@@ -22,8 +13,7 @@ class SliceIterable {
     slice (start, end) {
         const props = sliceCalculator(this, start, end)
         props.iterable = this.iterable
-        return Object.create(SliceIterable.prototype,
-            descriptorsFactory(props))
+        return Object.create(SliceIterable.prototype, vdf(props))
     }
 
     * [Symbol.iterator] () {
