@@ -14,7 +14,7 @@ $ npm install slice-iterable --save
 ```
 
 ## Usage
-``` JavaScript
+``` javascript
 const SliceIterable = require('slice-iterable')
 
 const iterable = new SliceIterable(new Set([4, 2, 7, 8, 4, 7])) // (4 2 7 8 4 7)
