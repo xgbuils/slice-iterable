@@ -1,19 +1,21 @@
-const sliceCalculator = require('slice-calculator')
-const vdf = require('value-descriptors-factory')
-
 class SliceIterable {
     constructor (iterable) {
-        Object.defineProperties(this, vdf({
-            iterable,
-            start: 0,
-            end: Infinity
-        }))
+        this.iterable = iterable
+        this.start = 0
+        this.end = Infinity
     }
 
     slice (start, end) {
-        const props = sliceCalculator(this, start, end)
-        props.iterable = this.iterable
-        return Object.create(SliceIterable.prototype, vdf(props))
+        start = Math.max(start, 0)
+        const newEnd = Math.min(this.start + end, this.end)
+        if (start === 0 && newEnd === this.end) {
+            return this
+        }
+        const obj = Object.create(SliceIterable.prototype)
+        obj.start = this.start + start
+        obj.end = newEnd
+        obj.iterable = this.iterable
+        return obj
     }
 
     * [Symbol.iterator] () {

@@ -37,10 +37,6 @@
     "tap-spec": "^4.1.1",
     "tape": "^4.8.0"
   },
-  "dependencies": {
-    "slice-calculator": "^0.1.0",
-    "value-descriptors-factory": "^0.1.0"
-  },
   "pre-commit": {
     "run": "test"
   }
