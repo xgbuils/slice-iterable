@@ -39,5 +39,8 @@
   },
   "pre-commit": {
     "run": "test"
+  },
+  "dependencies": {
+    "slice-iterable-method": "^0.1.0"
   }
 }
